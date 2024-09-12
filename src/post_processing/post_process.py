@@ -5,21 +5,7 @@ from skimage.measure import label, regionprops
 from src.dataset import brats_labels
 
 
-def opening(segmentation_mask: np.ndarray, kernel_size: tuple=(8,8,8)) ->  np.ndarray:
 
-    kernel =  np.ones(kernel_size)
-    mask =  ndimage.binary_opening(segmentation_mask, structure=kernel).astype(int)
-    return segmentation_mask * mask
-
-def remove_small_elements(segmentation_mask: np.ndarray, min_size: int=1000) ->  np.ndarray:
-
-    pred_mask = segmentation_mask > 0
-
-    mask = remove_small_objects(pred_mask, min_size=min_size)
-
-    clean_segmentation = segmentation_mask * mask
-
-    return clean_segmentation
 
 
 def keep_bigger_connected_component(segmentation_mask:  np.ndarray) ->  np.ndarray:
